@@ -36,6 +36,10 @@ class UserResource extends Resource
                     ->visibleOn('create')
                     ->password()
                     ->required(),
+                Forms\Components\Select::make('roles')
+                    ->relationship('roles', 'name')
+                    ->preload()
+                    ->searchable()
             ]);
     }
 
