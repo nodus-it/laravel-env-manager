@@ -8,15 +8,19 @@
     "require": {
         "php": "^8.4",
         "filament/filament": "v4.2.4",
-        "laravel/framework": "^12.0"
+        "laravel/framework": "^12.0",
+        "laravel/telescope": "^5.15"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.16",
         "fakerphp/faker": "^1.23",
+        "laravel/boost": "^1.8",
         "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.24",
+        "laravel/pint": "^1.26",
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^11.5.3"
     },
     "autoload": {
@@ -32,13 +36,17 @@
         }
     },
     "scripts": {
+        "pint": "./vendor/bin/pint --parallel",
+        "phpstan": "./vendor/bin/phpstan",
+        "test": [
+            "@pint",
+            "@phpstan"
+        ],
         "setup": [
             "composer install",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate",
-            "@php artisan migrate --force",
-            "npm install",
-            "npm run build"
+            "@php artisan migrate --force"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
@@ -55,6 +63,7 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan boost:update"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

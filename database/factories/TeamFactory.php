@@ -20,7 +20,7 @@ class TeamFactory extends Factory
 
         return [
             'name' => $name,
-            'slug' => Str::slug($name) . '-' . Str::random(6),
+            'slug' => Str::slug($name).'-'.Str::random(6),
             'owner_id' => User::factory(),
         ];
     }

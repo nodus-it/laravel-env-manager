@@ -19,7 +19,7 @@ class ProjectFactory extends Factory
 
         return [
             'name' => Str::title($name),
-            'slug' => Str::slug($name) . '-' . Str::random(6),
+            'slug' => Str::slug($name).'-'.Str::random(6),
             'repo_url' => $this->faker->optional()->url(),
             'description' => $this->faker->optional()->paragraph(),
         ];
