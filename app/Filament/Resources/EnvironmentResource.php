@@ -4,14 +4,27 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EnvironmentResource\Pages;
 use App\Models\Environment;
+use App\Models\EnvironmentVariableValue;
+use App\Models\ProjectVariableValue;
+use App\Models\VariableKey;
+use App\Filament\Resources\EnvironmentVariableValueResource;
+use App\Filament\Resources\ProjectVariableValueResource;
+use App\Filament\Resources\VariableKeyResource;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Infolists;
+use Filament\Notifications\Notification;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Width;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
+use App\Filament\Resources\EnvironmentResource\Actions\EditAtSourceAction;
+use App\Filament\Resources\EnvironmentResource\Actions\AdoptAsProjectDefaultAction;
+use App\Filament\Resources\EnvironmentResource\Actions\AdoptAsDefaultAction;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class EnvironmentResource extends Resource
@@ -103,7 +116,12 @@ class EnvironmentResource extends Resource
                 ->schema([
                     Infolists\Components\RepeatableEntry::make('effectiveVariables')
                         ->label('')
-                        ->columns(5)
+                        ->table([
+                            Infolists\Components\RepeatableEntry\TableColumn::make(__('fields.key')),
+                            Infolists\Components\RepeatableEntry\TableColumn::make(__('fields.type')),
+                            Infolists\Components\RepeatableEntry\TableColumn::make(__('fields.value')),
+                            Infolists\Components\RepeatableEntry\TableColumn::make(__('fields.source')),
+                        ])
                         ->state(function (Environment $record): array {
                             // Build effective variables for this environment: env override > project default > key default
                             $projectId = $record->project_id;
@@ -128,16 +146,24 @@ class EnvironmentResource extends Resource
                             foreach ($variableKeys as $vk) {
                                 $source = null;
                                 $value = null;
+                                $rawValue = null;
+                                $envValueId = null;
+                                $projectValueId = null;
 
                                 if (isset($envOverrides[$vk->id])) {
                                     $source = 'environment';
                                     $value = $envOverrides[$vk->id]->value;
+                                    $rawValue = $value;
+                                    $envValueId = $envOverrides[$vk->id]->getKey();
                                 } elseif (isset($projectDefaults[$vk->id])) {
                                     $source = 'project';
                                     $value = $projectDefaults[$vk->id]->value;
+                                    $rawValue = $value;
+                                    $projectValueId = $projectDefaults[$vk->id]->getKey();
                                 } elseif ($vk->default_value !== null && $vk->default_value !== '') {
                                     $source = 'default';
                                     $value = $vk->default_value;
+                                    $rawValue = $value;
                                 }
 
                                 if ($source === null) {
@@ -146,10 +172,16 @@ class EnvironmentResource extends Resource
 
                                 $rows[] = [
                                     'key' => $vk->key,
+                                    'variable_key_id' => $vk->id,
+                                    'environment_id' => $envId,
+                                    'project_id' => $projectId,
                                     'type' => $vk->type,
                                     'is_secret' => (bool) $vk->is_secret,
                                     'value' => $vk->is_secret ? '••••' : (string) $value,
+                                    'raw_value' => (string) $rawValue,
                                     'source' => $source,
+                                    'env_value_id' => $envValueId,
+                                    'project_value_id' => $projectValueId,
                                 ];
                             }
 
@@ -163,7 +195,12 @@ class EnvironmentResource extends Resource
                                 ->label(__('fields.type'))
                                 ->badge(),
                             Infolists\Components\TextEntry::make('value')
-                                ->label(__('fields.value')),
+                                ->label(__('fields.value'))
+                                ->suffixActions([
+                                    EditAtSourceAction::make(),
+                                    AdoptAsProjectDefaultAction::make(),
+                                    AdoptAsDefaultAction::make(),
+                                ]),
                             Infolists\Components\TextEntry::make('source')
                                 ->label(__('fields.source'))
                                 ->formatStateUsing(function (string $state): string {
@@ -179,6 +216,15 @@ class EnvironmentResource extends Resource
                                     'project' => 'warning',
                                     default => 'gray',
                                 }),
+                            Infolists\Components\TextEntry::make('actions')
+                                ->state('⋯')
+                                ->label('')
+                                ->alignment(Alignment::End)
+                                ->suffixActions([
+                                    EditAtSourceAction::make(),
+                                    AdoptAsProjectDefaultAction::make(),
+                                    AdoptAsDefaultAction::make(),
+                                ]),
                         ])
                         ->contained(false),
                 ]),

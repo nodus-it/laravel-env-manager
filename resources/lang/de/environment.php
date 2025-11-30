@@ -16,5 +16,14 @@ return [
             'project' => 'Projekt',
             'default' => 'Standard',
         ],
+        'actions' => [
+            'edit_at_source' => 'An der Quelle bearbeiten',
+            'adopt_as_project_default' => 'Als Projekt-Default übernehmen',
+            'adopt_as_default' => 'Als Standard übernehmen',
+        ],
+        'notifications' => [
+            'adopted_project_default' => 'Wert als Projekt-Default übernommen.',
+            'adopted_default' => 'Wert als Standard übernommen.',
+        ],
     ],
 ];
