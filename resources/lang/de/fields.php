@@ -8,6 +8,15 @@ return [
     'description' => 'Beschreibung',
     'role' => 'Rolle',
     'members' => 'Mitglieder',
-    'is_default' => 'Default',
+    'is_default' => 'Standard',
     'type' => 'Typ',
+
+    // Variablen
+    'key' => 'Schlüssel',
+    'is_secret' => 'Geheim',
+    'validation_rules' => 'Validierungsregeln',
+    'default_value' => 'Standardwert',
+    'variable_key' => 'Variablenschlüssel',
+    'value' => 'Wert',
+    'order' => 'Reihenfolge',
 ];

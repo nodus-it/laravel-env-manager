@@ -24,4 +24,19 @@ return [
         'label' => 'Environment',
         'plural' => 'Environments',
     ],
+
+    'variable_key' => [
+        'label' => 'Variable Key',
+        'plural' => 'Variable Keys',
+    ],
+
+    'project_variable_value' => [
+        'label' => 'Project Default',
+        'plural' => 'Project Defaults',
+    ],
+
+    'environment_variable_value' => [
+        'label' => 'Environment Override',
+        'plural' => 'Environment Overrides',
+    ],
 ];
