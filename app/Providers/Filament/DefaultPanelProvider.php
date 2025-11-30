@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -54,6 +55,12 @@ class DefaultPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])->plugins([
+                FilamentDeveloperLoginsPlugin::make()
+                    ->enabled(!app()->isProduction())
+                    ->users([
+                        'Test-User' => 'test@nodus-it.de',
+                    ])
             ]);
     }
 }
