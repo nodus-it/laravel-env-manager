@@ -28,7 +28,7 @@ class DefaultPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('default')
-            ->path('default')
+            ->path('/')
             ->login()
             ->maxContentWidth(Width::Full)
             ->colors([
@@ -59,8 +59,9 @@ class DefaultPanelProvider extends PanelProvider
                 FilamentDeveloperLoginsPlugin::make()
                     ->enabled(!app()->isProduction())
                     ->users([
-                        'Test-User' => 'test@nodus-it.de',
+                        'Test-User' => 'test@nodus-it.de'
                     ])
+                    ->switchable(false),
             ]);
     }
 }
