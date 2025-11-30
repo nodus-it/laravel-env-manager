@@ -3,6 +3,7 @@
 return [
     'navigation' => [
         'organisation' => 'Organisation',
+        'settings' => 'Einstellungen',
     ],
 
     'team' => [
@@ -36,7 +37,7 @@ return [
     ],
 
     'environment_variable_value' => [
-        'label' => 'Environment-Override',
-        'plural' => 'Environment-Overrides',
+        'label' => 'Umgebungsvariable',
+        'plural' => 'Umgebungsvariablen',
     ],
 ];

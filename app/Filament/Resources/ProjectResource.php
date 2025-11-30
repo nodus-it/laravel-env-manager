@@ -23,7 +23,7 @@ class ProjectResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('models.navigation.organisation');
+        return __('models.navigation.settings');
     }
 
     public static function getModelLabel(): string
