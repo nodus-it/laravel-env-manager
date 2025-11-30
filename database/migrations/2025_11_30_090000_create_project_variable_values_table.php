@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('updated_by')->constrained('users');
             $table->timestamps();
 
-            $table->unique(['project_id', 'variable_key_id']);
+            $table->unique(['project_id', 'variable_key_id'], 'proj_var_values_proj_key_uq');
         });
     }
 

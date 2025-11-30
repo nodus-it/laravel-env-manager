@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('updated_by')->constrained('users');
             $table->timestamps();
 
-            $table->unique(['environment_id', 'variable_key_id']);
+            $table->unique(['environment_id', 'variable_key_id'], 'env_var_values_env_key_uq');
         });
     }
 
