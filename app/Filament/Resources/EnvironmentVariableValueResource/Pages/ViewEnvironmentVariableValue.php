@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\EnvironmentVariableValueResource\Pages;
 
-use App\Filament\Resources\Pages\BaseViewRecord;
 use App\Filament\Resources\EnvironmentVariableValueResource;
+use App\Filament\Resources\Pages\BaseViewRecord;
 
 class ViewEnvironmentVariableValue extends BaseViewRecord
 {

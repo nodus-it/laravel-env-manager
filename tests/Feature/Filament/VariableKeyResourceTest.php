@@ -1,7 +1,6 @@
 <?php
 
 use App\Filament\Resources\VariableKeyResource\Pages\CreateVariableKey;
-use App\Filament\Resources\VariableKeyResource\Pages\EditVariableKey;
 use App\Filament\Resources\VariableKeyResource\Pages\ListVariableKeys;
 use App\Models\User;
 use App\Models\VariableKey;

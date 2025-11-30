@@ -50,7 +50,9 @@ class EnvironmentVariableValueResource extends Resource
                 ->preload()
                 ->required()
                 ->live()
-                ->afterStateUpdated(function ($state, $set) { $set('value', null); })
+                ->afterStateUpdated(function ($state, $set) {
+                    $set('value', null);
+                })
                 ->rules([
                     function ($get, $record) {
                         return \Illuminate\Validation\Rule::unique('environment_variable_values', 'variable_key_id')

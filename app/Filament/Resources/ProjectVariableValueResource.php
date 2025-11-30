@@ -12,7 +12,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Validation\Rule;
 
 class ProjectVariableValueResource extends Resource
 {
@@ -51,7 +50,9 @@ class ProjectVariableValueResource extends Resource
                 ->preload()
                 ->required()
                 ->live()
-                ->afterStateUpdated(function ($state, $set) { $set('value', null); })
+                ->afterStateUpdated(function ($state, $set) {
+                    $set('value', null);
+                })
                 ->rules([
                     function ($get, $record) {
                         return \Illuminate\Validation\Rule::unique('project_variable_values', 'variable_key_id')

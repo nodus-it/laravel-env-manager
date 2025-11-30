@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\VariableKeyResource\Pages;
 
-use App\Filament\Resources\VariableKeyResource;
 use App\Filament\Resources\Pages\BaseListRecords;
+use App\Filament\Resources\VariableKeyResource;
 
 class ListVariableKeys extends BaseListRecords
 {
