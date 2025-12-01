@@ -12,7 +12,8 @@
         "filament/filament": "v4.2.4",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
-        "laravel/telescope": "^5.15"
+        "laravel/telescope": "^5.15",
+        "spatie/laravel-data": "^4.18"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",
