@@ -1,8 +1,7 @@
 <?php
 
-use App\Filament\Resources\ProjectResource\Pages\CreateProject;
-use App\Filament\Resources\ProjectResource\Pages\EditProject;
 use App\Filament\Resources\ProjectResource\Pages\ListProjects;
+use App\Filament\Resources\ProjectResource\Pages\ViewProject;
 use App\Models\Project;
 use App\Models\User;
 use Filament\Facades\Filament;
@@ -27,7 +26,7 @@ it('lists projects in the table and supports search and sort', function (): void
         ->assertCanNotSeeTableRecords($projects->skip(1));
 });
 
-it('can create a project via the create page', function (): void {
+it('can create a project via the create modal on the list page', function (): void {
     $form = [
         'name' => 'Env Manager',
         'slug' => 'env-manager',
@@ -35,42 +34,38 @@ it('can create a project via the create page', function (): void {
         'description' => 'Test description',
     ];
 
-    Livewire::test(CreateProject::class)
-        ->fillForm($form)
-        ->call('create')
-        ->assertNotified()
-        ->assertRedirect();
+    Livewire::test(ListProjects::class)
+        ->callAction('create', $form)
+        ->assertNotified();
 
     expect(Project::query()->where('slug', 'env-manager')->exists())->toBeTrue();
 });
 
-it('validates required fields on create', function (): void {
-    Livewire::test(CreateProject::class)
-        ->fillForm([
+it('validates required fields on create modal', function (): void {
+    Livewire::test(ListProjects::class)
+        ->callAction('create', [
             'name' => '',
             'slug' => '',
         ])
-        ->call('create')
-        ->assertHasFormErrors([
+        ->assertHasActionErrors([
             'name' => 'required',
             'slug' => 'required',
         ]);
 });
 
-it('can edit a project', function (): void {
+it('can edit a project via the edit modal on the view page', function (): void {
     $project = Project::factory()->create([
         'name' => 'Old',
         'slug' => 'old',
     ]);
 
-    Livewire::test(EditProject::class, [
+    Livewire::test(ViewProject::class, [
         'record' => $project->getKey(),
     ])
-        ->fillForm([
+        ->callAction('edit', [
             'name' => 'New Name',
             'slug' => 'new-slug',
         ])
-        ->call('save')
         ->assertNotified();
 
     $project->refresh();

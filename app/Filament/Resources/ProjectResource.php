@@ -5,15 +5,13 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers\TeamsRelationManager;
 use App\Models\Project;
-use Filament\Actions;
 use Filament\Forms;
 use Filament\Infolists;
-use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class ProjectResource extends Resource
+class ProjectResource extends BaseResource
 {
     protected static ?string $model = Project::class;
 
@@ -66,8 +64,8 @@ class ProjectResource extends Resource
             Infolists\Components\TextEntry::make('name')->label(__('fields.name')),
             Infolists\Components\TextEntry::make('slug')->label(__('fields.slug')),
             Infolists\Components\TextEntry::make('repo_url')->label(__('fields.repo_url'))->url(fn ($record) => $record->repo_url, true),
-            Infolists\Components\TextEntry::make('created_at')->label(__('timestamps.created_at'))->dateTime('d.m.Y H:i'),
-            Infolists\Components\TextEntry::make('updated_at')->label(__('timestamps.updated_at'))->dateTime('d.m.Y H:i'),
+            Infolists\Components\TextEntry::make('created_at')->label(__('timestamps.created_at'))->dateTime(self::dateTimeFormat()),
+            Infolists\Components\TextEntry::make('updated_at')->label(__('timestamps.updated_at'))->dateTime(self::dateTimeFormat()),
         ]);
     }
 
@@ -89,22 +87,14 @@ class ProjectResource extends Resource
                     ->counts('teams')
                     ->label(__('models.team.plural')),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('d.m.Y H:i')
+                    ->dateTime(self::dateTimeFormat())
                     ->sortable(),
             ])
             ->filters([
                 //
             ])
-            ->recordActions([
-                Actions\ActionGroup::make([
-                    Actions\EditAction::make(),
-                ])->label(__('actions.group')),
-            ])
-            ->toolbarActions([
-                Actions\BulkActionGroup::make([
-                    Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->recordActions(self::defaultRecordActions())
+            ->toolbarActions(self::defaultToolbarActions());
     }
 
     public static function getRelations(): array
@@ -118,9 +108,7 @@ class ProjectResource extends Resource
     {
         return [
             'index' => Pages\ListProjects::route('/'),
-            'create' => Pages\CreateProject::route('/create'),
             'view' => Pages\ViewProject::route('/{record}'),
-            'edit' => Pages\EditProject::route('/{record}/edit'),
         ];
     }
 }
