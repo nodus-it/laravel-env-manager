@@ -123,10 +123,15 @@ class ProjectVariableValueResource extends BaseResource
         return [];
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProjectVariableValues::route('/'),
+            'index' => Pages\ViewProjectVariableValue::route('/'),
             'view' => Pages\ViewProjectVariableValue::route('/{record}'),
         ];
     }

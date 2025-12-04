@@ -32,6 +32,11 @@ class EnvironmentVariableValueResource extends BaseResource
         return __('models.environment_variable_value.plural');
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema->schema([

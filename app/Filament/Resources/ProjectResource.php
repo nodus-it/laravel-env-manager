@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectResource\Pages;
+use App\Filament\Resources\ProjectResource\RelationManagers\EnvironmentsRelationManager;
+use App\Filament\Resources\ProjectResource\RelationManagers\ProjectVariableValuesRelationManager;
 use App\Filament\Resources\ProjectResource\RelationManagers\TeamsRelationManager;
 use App\Models\Project;
 use Filament\Forms;
@@ -100,6 +102,8 @@ class ProjectResource extends BaseResource
     public static function getRelations(): array
     {
         return [
+            EnvironmentsRelationManager::class,
+            ProjectVariableValuesRelationManager::class,
             TeamsRelationManager::class,
         ];
     }

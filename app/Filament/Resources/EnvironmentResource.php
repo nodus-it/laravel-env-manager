@@ -206,10 +206,15 @@ class EnvironmentResource extends BaseResource
         ];
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEnvironments::route('/'),
+            'index' => Pages\ViewEnvironment::route('/'),
             'view' => Pages\ViewEnvironment::route('/{record}'),
         ];
     }

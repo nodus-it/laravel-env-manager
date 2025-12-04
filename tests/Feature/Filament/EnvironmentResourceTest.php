@@ -1,8 +1,5 @@
 <?php
 
-use App\Filament\Resources\EnvironmentResource\Pages\CreateEnvironment;
-use App\Filament\Resources\EnvironmentResource\Pages\EditEnvironment;
-use App\Filament\Resources\EnvironmentResource\Pages\ListEnvironments;
 use App\Models\Environment;
 use App\Models\Project;
 use App\Models\User;

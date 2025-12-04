@@ -25,4 +25,9 @@ class Project extends BaseModel
     {
         return $this->hasMany(Environment::class);
     }
+
+    public function projectVariableValues(): HasMany
+    {
+        return $this->hasMany(ProjectVariableValue::class);
+    }
 }
