@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('repo_url')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index('name');
         });

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('updated_by')->constrained('users');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['environment_id', 'variable_key_id'], 'env_var_values_env_key_uq');
         });

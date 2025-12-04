@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('type');
             $table->boolean('is_default')->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['project_id', 'slug']);
             $table->index(['project_id', 'type']);

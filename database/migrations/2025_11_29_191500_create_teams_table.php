@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->foreignId('owner_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index('owner_id');
         });

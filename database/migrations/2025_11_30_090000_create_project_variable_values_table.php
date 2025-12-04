@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('updated_by')->constrained('users');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['project_id', 'variable_key_id'], 'proj_var_values_proj_key_uq');
         });

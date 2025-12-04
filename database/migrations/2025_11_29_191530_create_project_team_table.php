@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreignId('team_id')->constrained('teams')->cascadeOnDelete();
             $table->string('role');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['project_id', 'team_id']);
             $table->index('role');

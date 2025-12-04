@@ -16,6 +16,7 @@ class VariableKeyResource extends BaseResource
     protected static ?string $model = VariableKey::class;
 
     protected static string|null|\UnitEnum $navigationGroup = NavigationGroup::MAIN;
+
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-key';
 
     public static function form(Schema $schema): Schema

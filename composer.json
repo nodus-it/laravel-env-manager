@@ -81,8 +81,9 @@
             "composer install",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate",
-            "@php artisan migrate --force",
-            "php artisan filament:user --name=Test --email=test@nodus-it.de --password=12345678"
+            "@php artisan migrate:fresh --force",
+            "@php artisan filament:user --name=Test --email=test@nodus-it.de --password=12345678",
+            "@php artisan db:seed TestSeeder"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
