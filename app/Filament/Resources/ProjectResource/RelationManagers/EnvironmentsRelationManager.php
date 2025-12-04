@@ -77,8 +77,6 @@ class EnvironmentsRelationManager extends RelationManager
                 Tables\Columns\IconColumn::make('is_default')
                     ->label(__('fields.is_default'))
                     ->boolean(),
-                Tables\Columns\TextColumn::make('order')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d.m.Y H:i')
                     ->sortable(),
