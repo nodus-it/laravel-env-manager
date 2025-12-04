@@ -1,5 +1,8 @@
 name: run-tests
 
+env:
+  APP_ENV: local
+
 on:
   push:
     paths:
