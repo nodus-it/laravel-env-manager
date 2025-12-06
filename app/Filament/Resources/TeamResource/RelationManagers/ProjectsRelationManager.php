@@ -7,6 +7,7 @@ use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class ProjectsRelationManager extends RelationManager
@@ -49,9 +50,16 @@ class ProjectsRelationManager extends RelationManager
                     ->label(__('fields.role'))
                     ->badge()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('pivot.created_at')
-                    ->label(__('relations.linked'))
-                    ->dateTime('d.m.Y H:i'),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
+                TextColumn::make('created_by.name')
+                    ->sortable(),
+                TextColumn::make('updated_at')
+                    ->dateTime('d.m.Y H:i')
+                    ->sortable(),
+                TextColumn::make('updatedBy.name')
+                    ->sortable(),
             ])
             ->headerActions([
                 Actions\AttachAction::make()

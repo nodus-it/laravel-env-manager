@@ -74,8 +74,18 @@ class ProjectResource extends BaseResource
                 Tables\Columns\TextColumn::make('teams_count')
                     ->counts('teams')
                     ->label(__('models.team.plural')),
+                Tables\Columns\IconColumn::make('is_secret')
+                    ->label(__('fields.is_secret'))
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_by.name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime('d.m.Y H:i')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updatedBy.name')
                     ->sortable(),
             ])
             ->recordActions(self::defaultRecordActions())

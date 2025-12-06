@@ -74,6 +74,13 @@ class TeamResource extends BaseResource
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable(),
+                TextColumn::make('created_by.name')
+                    ->sortable(),
+                TextColumn::make('updated_at')
+                    ->dateTime('d.m.Y H:i')
+                    ->sortable(),
+                TextColumn::make('updatedBy.name')
+                    ->sortable(),
             ]);
     }
 

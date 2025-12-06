@@ -8,6 +8,7 @@ use Filament\Forms;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Validation\Rule;
 
@@ -72,8 +73,15 @@ class ProjectVariableValuesRelationManager extends RelationManager
                     ->formatStateUsing(function ($record) {
                         return $record->variableKey?->is_secret ? '••••' : $record->value;
                     }),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
+                TextColumn::make('created_by.name')
+                    ->sortable(),
+                TextColumn::make('updated_at')
                     ->dateTime('d.m.Y H:i')
+                    ->sortable(),
+                TextColumn::make('updatedBy.name')
                     ->sortable(),
             ])
             ->headerActions([
