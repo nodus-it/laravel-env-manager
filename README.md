@@ -25,11 +25,43 @@ Environment Manager is a Laravel application focused on clarity and maintainabil
 docker run --name=<name> -p <port>:80 nodusit/laravel-env-manager:nginx-latest
 `
 
-#### Compose
+#### Compose (production, separate Nginx; repo-independent)
 
-´
-TODO
-´
+For production, use the PHP-FPM only image and run Nginx separately.
+
+Use the in-repo Compose setup instead of an embedded snippet:
+- Compose file: `.docker/compose/docker-compose.yml`
+- Nginx config used by the Compose setup: `.docker/compose/default.conf`
+
+Quick start:
+
+```
+docker compose -f ./.docker/compose/docker-compose.yml up -d
+```
+
+Then initialize the app (generate key, run migrations):
+
+```
+docker compose -f ./.docker/compose/docker-compose.yml exec app php artisan key:generate
+docker compose -f ./.docker/compose/docker-compose.yml exec app php artisan migrate
+```
+
+Essential environment variables (examples):
+
+```
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8080
+
+DB_CONNECTION=mariadb
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=env_manager
+DB_USERNAME=env
+DB_PASSWORD=secret
+```
+
+The application is exposed on http://localhost:8080.
 
 ### Run manually
 - Clone the repository
