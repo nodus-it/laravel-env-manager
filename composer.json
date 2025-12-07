@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "nodus-it/env-manager",
+    "name": "nodus-it/laravel-env-manager",
     "type": "project",
     "description": "Environment variable manager for Laravel applications with a Filament-based UI.",
     "keywords": [
@@ -17,10 +17,16 @@
     "homepage": "https://nodus-it.de",
     "authors": [
         {
-            "name": "Bastian Schur",
-            "email": "github@nodus-it.de",
-            "homepage": "https://www.bastian-schur.de",
-            "role": "Lead Developer & Maintainer"
+            "name": "Bastian Schur (Nodus IT)",
+            "email": "b.schur@nodus-it.de",
+            "role": "Lead Developer & Maintainer",
+            "homepage": "https://www.nodus-it.de"
+        },
+        {
+            "name": "Dominique Heinelt (naNO Consult GbR)",
+            "email": "dominique.heinelt@nano-consult.de",
+            "role": "Developer & Maintainer",
+            "homepage": "https://www.nano-consult.de"
         },
         {
             "name": "Nodus IT",
@@ -29,8 +35,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/nodus-it/env-manager/issues",
-        "source": "https://github.com/nodus-it/env-manager"
+        "issues": "https://github.com/nodus-it/laravel-env-manager/issues",
+        "source": "https://github.com/nodus-it/laravel-env-manager"
     },
     "require": {
         "php": "^8.3",
