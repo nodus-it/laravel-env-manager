@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static Collection<int, EnvironmentKeyData> getKeys(Environment $environment, bool $showSecrets = false)
+ * @method static void setKey(Environment $environment, string $key, mixed $value, \App\Enums\VariableKeySource $source)
  */
 class EnvironmentService extends Facade
 {

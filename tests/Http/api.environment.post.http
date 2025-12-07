@@ -1,0 +1,14 @@
+PUT http://localhost:8000/api/environment
+Accept: application/json
+Content-Type: application/json
+Authorization: {{$auth.token}}
+
+{
+    "keys": [
+        {
+            "key": "APP_TEST",
+            "value": "false",
+            "source": "environment"
+        }
+    ]
+}

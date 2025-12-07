@@ -69,7 +69,7 @@ class DefaultPanelProvider extends PanelProvider
                 FilamentDeveloperLoginsPlugin::make()
                     ->enabled(! app()->isProduction())
                     ->users([
-                        'Test-User' => 'test@nodus-it.de',
+                        'Test-User' => 'admin@admin',
                     ])
                     ->switchable(false),
                 BreezyCore::make()
