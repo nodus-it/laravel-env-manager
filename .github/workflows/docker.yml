@@ -52,7 +52,7 @@ jobs:
       # BASE / APP IMAGE
       # ----------------------------
       - name: Build & Push Base/App Image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: .docker/app/Dockerfile
@@ -65,7 +65,7 @@ jobs:
       # AIO / NGINX IMAGE
       # ----------------------------
       - name: Build & Push Nginx AIO Image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: .docker/nginx/Dockerfile
