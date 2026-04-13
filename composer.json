@@ -44,7 +44,7 @@
         "dutchcodingcompany/filament-developer-logins": "^2.0",
         "filament/filament": "v5.4.4",
         "jeffgreco13/filament-breezy": "^v3.0.3",
-        "laravel/framework": "^12.0",
+        "laravel/framework": "^13.4",
         "laravel/sanctum": "^4.0",
         "spatie/laravel-data": "^4.18",
         "ext-pdo": "*"
